@@ -30,7 +30,7 @@ public class MainController {
     @GetMapping("/club/{age}")
     public String club(@PathVariable("age") int age,
                        Model model){
-        model.addAttribute("infoText", age >= 18 ? "możesz wejść do klubu" :  "no niestety");
+        model.addAttribute("age", age);
         return "club";
     }
 }

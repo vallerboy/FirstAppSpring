@@ -6,8 +6,8 @@
 </head>
 <body>
     <div style="text-align: center;">
-        <h1 style="color: red">
-            <span th:text="${infoText}"></span>
+        <h1 th:style="'color:' + ${age >= 18 ? 'green' : 'red'}">
+            <span th:text="${age >= 18 ? 'Wchodzisz' : 'Wychodzisz'}"></span>
         </h1>
     </div>
 </body>
