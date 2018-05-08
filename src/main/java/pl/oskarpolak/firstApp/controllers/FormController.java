@@ -31,4 +31,19 @@ public class FormController {
         return "register";
     }
 
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String postLogin(@RequestParam("login") String login,
+                            @RequestParam("password") String password,
+                            Model model){
+        boolean isLoginCorrect  = login.equals("admin") && password.equals("admin");
+
+        model.addAttribute("isLoginCorrect", isLoginCorrect);
+        return "login";
+    }
+
 }
