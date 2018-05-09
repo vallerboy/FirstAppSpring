@@ -3,10 +3,11 @@ package pl.oskarpolak.firstApp.controllers;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import pl.oskarpolak.firstApp.models.LoginForm;
+
+import javax.validation.Valid;
 
 @Controller
 public class FormController {
@@ -32,16 +33,18 @@ public class FormController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public String login(Model model) {
+        model.addAttribute("loginForm", new LoginForm());
         return "login";
     }
 
     @PostMapping("/login")
-    public String postLogin(@RequestParam("login") String login,
-                            @RequestParam("password") String password,
+    public String postLogin(@ModelAttribute @Valid LoginForm loginForm,
+                            BindingResult bindingResult,
                             Model model){
-        boolean isLoginCorrect  = login.equals("admin") && password.equals("admin");
 
+
+        boolean isLoginCorrect  = loginForm.getLogin().equals("admin") && loginForm.getPassword().equals("admin");
         model.addAttribute("isLoginCorrect", isLoginCorrect);
         return "login";
     }
